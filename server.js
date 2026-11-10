@@ -57,7 +57,7 @@ app.post('/api/rooms', (req,res)=>{
   const password = String(req.body.password||'');
   if(!name || password.length < 4) return res.status(400).json({error:'Informe o nome da sala e uma senha de pelo menos 4 caracteres.'});
   const id = roomId();
-  db.prepare('INSERT INTO rooms(id,name,host_hash,created_at) VALUES(?,?,?,datetime("now"))')
+  db.prepare("INSERT INTO rooms(id,name,host_hash,created_at) VALUES(?,?,?,datetime('now'))")
     .run(id,name,hash(password));
   req.session.hostRoom=id;
   res.json({id,name});
