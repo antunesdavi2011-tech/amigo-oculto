@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0c12">
+<title>Amigo Oculto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="header"><a class="brand" href="#" onclick="show('home');return false"><span class="brand-mark">🎁</span><span>Amigo Oculto</span></a></header>
+
+<main>
+<section id="home" class="view active">
+  <div class="hero">
+    <div class="eyebrow">SORTEIO SECRETO</div>
+    <h1>Amigo Oculto,<br><span>sem complicação.</span></h1>
+    <p>Crie uma sala, compartilhe o link e deixe cada pessoa descobrir seu presente em segredo.</p>
+    <div class="hero-actions">
+      <button class="primary big" onclick="show('create')">Criar uma sala <span>→</span></button>
+      <button class="secondary big" onclick="show('join')">Entrar em uma sala</button>
+    </div>
+  </div>
+  <div class="features">
+    <div><span>🔐</span><strong>Privado</strong><small>Cada resultado tem sua própria senha.</small></div>
+    <div><span>🎲</span><strong>Justo</strong><small>Ninguém tira a si mesmo.</small></div>
+    <div><span>✨</span><strong>Secreto</strong><small>Oculto e Onça são separados.</small></div>
+  </div>
+</section>
+
+<section id="create" class="view page narrow">
+  <button class="back" onclick="show('home')">← Voltar</button>
+  <div class="panel">
+    <div class="step">01 <span>•</span> CRIAR SALA</div>
+    <h2>Vamos começar.</h2><p class="muted">Você será o anfitrião desta sala.</p>
+    <label>Nome da sala<input id="roomName" placeholder="Amigo Oculto 2026" maxlength="60"></label>
+    <label>Senha do anfitrião<input id="hostPass" type="password" placeholder="Pelo menos 4 caracteres"></label>
+    <button class="primary full" onclick="createRoom()">Criar sala <span>→</span></button>
+    <div id="createMsg" class="msg"></div>
+  </div>
+</section>
+
+<section id="host" class="view page wide">
+  <div class="topbar"><div><div class="eyebrow">ANFITRIÃO</div><h2 id="hostTitle"></h2></div><button class="secondary small" onclick="copyLink()">🔗 Copiar link</button></div>
+  <div class="panel">
+    <div class="share"><div><small>LINK DA SALA</small><div id="roomLink"></div></div><button onclick="copyLink()">Copiar</button></div>
+    <div class="section-head"><div><h3>Participantes</h3><p class="muted">Coloque um nome por linha.</p></div></div>
+    <textarea id="names" rows="7" placeholder="João&#10;Maria&#10;Pedro&#10;Ana"></textarea>
+    <button class="secondary full" onclick="saveParticipants()">Salvar participantes</button>
+    <div id="people" class="people"></div>
+    <div class="warning">⚠️ Depois de realizar o sorteio, a lista não poderá mais ser alterada.</div>
+    <button class="draw" onclick="draw()">🎲 Realizar sorteio</button>
+    <div id="hostMsg" class="msg"></div>
+  </div>
+</section>
+
+<section id="join" class="view page narrow">
+  <button class="back" onclick="show('home')">← Voltar</button>
+  <div class="panel">
+    <div class="step">ENTRAR</div><h2>Você recebeu um convite?</h2><p class="muted">Cole o link ou código da sala abaixo.</p>
+    <label>Link ou código<input id="roomCode" placeholder="Cole aqui o link da sala"></label>
+    <button class="primary full" onclick="openRoom()">Continuar <span>→</span></button>
+    <div id="joinMsg" class="msg"></div>
+  </div>
+</section>
+
+<section id="choose" class="view page narrow">
+  <button class="back" onclick="show('join')">← Outra sala</button>
+  <div class="panel"><div class="step">02 <span>•</span> SEU NOME</div><h2 id="joinTitle"></h2><p class="muted">Quem é você? Escolha seu nome para continuar.</p><div id="namesList" class="names"></div><div id="joinMsg2" class="msg"></div></div>
+</section>
+
+<section id="login" class="view page narrow">
+  <button class="back" onclick="show('choose')">← Voltar</button>
+  <div class="panel"><div class="step">03 <span>•</span> ACESSO</div><h2 id="selectedName"></h2><p class="muted" id="passHelp"></p>
+  <label>Sua senha<input id="userPass" type="password" placeholder="Digite sua senha"></label>
+  <button class="primary full" onclick="loginUser()">Acessar meu resultado <span>→</span></button><div id="loginMsg" class="msg"></div></div>
+</section>
+
+<section id="result" class="view page narrow">
+  <div class="result-head"><div class="eyebrow">SEU RESULTADO</div><h2 id="resultName"></h2><p class="muted">Guarde estas informações em segredo.</p></div>
+  <div class="result-card gift"><span>🎁</span><div><small>AMIGO OCULTO</small><strong id="secretName"></strong></div></div>
+  <div class="result-card onca"><span>😈</span><div><small>AMIGO DA ONÇA</small><strong id="prankName"></strong></div></div>
+  <div class="secret-note">🤫 Não mostre esta tela para ninguém.</div>
+  <button class="secondary full" onclick="show('home')">Voltar ao início</button>
+</section>
+</main>
+<footer>Amigo Oculto • simples, secreto e feito para grupos</footer>
+<script src="/app.js"></script>
+</body>
+</html>
