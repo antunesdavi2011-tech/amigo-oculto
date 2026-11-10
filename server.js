@@ -160,6 +160,8 @@ app.get('/api/rooms/:id/host',(req,res)=>{
 
 app.post('/api/logout',(req,res)=>req.session.destroy(()=>res.json({ok:true})));
 
+
+
 app.use((req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
 
 const port=process.env.PORT||3000;
